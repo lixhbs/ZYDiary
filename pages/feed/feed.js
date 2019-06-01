@@ -1,14 +1,15 @@
+const util = require('../../utils/util.js');
+const app = getApp();
 // pages/feed/feed.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     picker: ['母乳', '奶粉', '辅食'],
     index: '0',
-    time: '12:01',
-    date: '2018-12-25',
+    time: util.formatTimes(new Date()),
+    date: util.formatDate(new Date()),
     imgList: []
   },
 
@@ -34,15 +35,33 @@ Page({
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
-        if (this.data.imgList.length != 0) {
-          this.setData({
-            imgList: this.data.imgList.concat(res.tempFilePaths)
-          })
-        } else {
-          this.setData({
-            imgList: res.tempFilePaths
-          })
-        }
+        let tempFilePath = res.tempFilePaths[0];
+        let that = this;
+        wx.uploadFile({
+          url: `${app.globalData.baseUrl}/upload/uploadImage`,
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          success(res) {
+            const fileData = JSON.parse(res.data);
+            let foleData = [{
+              tempFilePath: tempFilePath,
+              fileData: fileData,
+              filePath: `${app.globalData.baseUrl}/upload/downloadUpload/${fileData.datafile}/${fileData.name}`,
+            }]
+            if (that.data.imgList.length != 0) {
+              that.setData({
+                imgList: that.data.imgList.concat(foleData)
+              })
+            } else {
+              that.setData({
+                imgList: foleData
+              })
+            }
+          },
+          fail(e) {
+            console.log(e)
+          }
+        })
       }
     });
   },
@@ -68,7 +87,9 @@ Page({
       }
     })
   },
-
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
