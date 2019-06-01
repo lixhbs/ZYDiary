@@ -1,0 +1,9 @@
+<!--pages/home/home.wxml-->
+<view class="grid col-2 padding-sm">
+  <view class="padding-sm" wx:for="{{ MenuList }}" wx:key>
+    <view data-url="{{ item.url }}" class="bg-{{item.name}} padding radius text-center shadow-blur" bindtap='menuNavigateTo'>
+      <view class="text-lg">{{item.title}}</view>
+      <view class="margin-top-sm text-Abc">{{item.text}}</view>
+    </view>
+  </view>
+</view>
