@@ -1,10 +1,13 @@
 // pages/home/home.js
+const database = require('../../utils/data.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    Dietnote: {},
+    isfeed: true,
     MenuList: [{
       title: '喂食',
       name: 'red',
@@ -58,6 +61,13 @@ Page({
       })
     }
   },
+  overClick: function() {
+    database.endSetting(this.data.Dietnote).then(res => {
+      if (res.data) {
+        this.searchDietnote()
+      }
+    });
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -77,7 +87,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
+    this.searchDietnote()
+  },
+  searchDietnote: function (){
+    database.searchDietnote().then(res => {
+      if (res.data) {
+        this.setData({
+          isfeed: true,
+          Dietnote: res.data
+        });
+      } else{
+        this.setData({
+          isfeed: false,
+          Dietnote: {}
+        });
+      }
+    });
   },
 
   /**

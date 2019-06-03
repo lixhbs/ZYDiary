@@ -1,4 +1,24 @@
 <!--pages/home/home.wxml-->
+<view class="cu-bar bg-white margin-top">
+  <view class="action">
+    <text class="cuIcon-titles text-green"></text>
+    <text>待办事项</text>
+  </view>
+</view>
+<view class="grid col-1 padding-sm">
+  <view class="padding-sm">
+    <view wx:if="{{isfeed}}"class="bg-gradual-red padding radius text-center shadow-blur">
+      <view class="text-lg" bindtap='overClick'>喂食中（点击结束）</view>
+      <view class="margin-top-sm text-Abc">{{Dietnote.begintime}}</view>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white margin-top">
+  <view class="action">
+    <text class="cuIcon-titles text-green"></text>
+    <text>功能按钮</text>
+  </view>
+</view>
 <view class="grid col-2 padding-sm">
   <view class="padding-sm" wx:for="{{ MenuList }}" wx:key>
     <view data-url="{{ item.url }}" class="bg-{{item.name}} padding radius text-center shadow-blur" bindtap='menuNavigateTo'>
