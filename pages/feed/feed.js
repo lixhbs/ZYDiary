@@ -1,4 +1,5 @@
 const util = require('../../utils/util.js');
+const database = require('../../utils/data.js');
 const app = getApp();
 // pages/feed/feed.js
 Page({
@@ -12,7 +13,9 @@ Page({
     time: util.formatTimes(new Date()),
     date: util.formatDate(new Date()),
     imgList: [],
-    previewImage: []
+    previewImage: [],
+    DietnoteInfo: {},
+    notes: ""
   },
 
   PickerChange(e) {
@@ -118,6 +121,32 @@ Page({
       }
     })
   },
+  overClick: function () {
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否结束本次记录',
+      success(res) {
+        if (res.confirm) {
+          database.endSetting(that.data.DietnoteInfo).then(res => {
+            if (res.data) {
+              wx.showToast({
+                title: '记录成功',
+                icon: 'success',
+                complete: () => {
+                  setTimeout(() => {
+                    wx.switchTab({
+                      url: './../home/home',
+                    })
+                  }, 2000)
+                }
+              })
+            }
+          });
+        }
+      }
+    })
+  },
   formSubmit: function (e) {
     let dietnotes = e.detail.value
     dietnotes.imglist = JSON.stringify(this.data.imgList)
@@ -142,14 +171,13 @@ Page({
               }, 2000)
             }
           })
+        } else{
+          wx.showToast({
+            title: '记录失败',
+            icon: 'none'
+          })
         }
       },
-      fail(e) {
-        wx.showToast({
-          title: '删除失败',
-          icon: 'none'
-        })
-      }
     })
 
   },
@@ -182,10 +210,18 @@ Page({
       },
       method: "POST",
       success(res) {
-        console.log(res.data)
-        that.setData({
-          DietnoteInfo: res.data
-        })
+        if (res.data.data){
+          console.log(res.data.data)
+          that.setData({
+            DietnoteInfo: res.data.data,
+            notes: res.data.data.notes,
+            readonly: true
+          })
+          wx.showToast({
+            title: "正在喂奶中。。。",
+            icon: "none"
+          })
+        }
       },
       fail(e) {
         wx.showToast({

@@ -8,7 +8,7 @@
 </view> -->
 
 <form bindsubmit="formSubmit" >
-  <view class="cu-form-group margin-top">
+  <view class="cu-form-group margin-top" wx:if="{{!readonly}}">
 		<view class="title">开始日期</view>
 		<picker disabled="{{readonly}}" mode="date" value="{{date}}" name="date" start="2018-01-01" end="2030-01-01" bindchange="DateChange">
 			<view class="picker">
@@ -16,7 +16,7 @@
 			</view>
 		</picker>
 	</view>
-  <view class="cu-form-group">
+  <view class="cu-form-group" wx:if="{{!readonly}}">
 		<view class="title">开始时间</view>
 		<picker disabled="{{readonly}}" mode="time" value="{{time}}" name="time" start="09:01" end="21:01" bindchange="TimeChange">
 			<view class="picker">
@@ -24,19 +24,31 @@
 			</view>
 		</picker>
 	</view>
+
+  <view class="cu-form-group margin-top" wx:if="{{readonly}}" >
+		<view class="title">开始时间</view>
+    <view class="text-left padding">{{DietnoteInfo.begintime}}</view>
+	</view>
+
   <view class="cu-form-group">
 		<view class="title">食物类型</view>
-		<picker disabled="{{readonly}}" bindchange="PickerChange" value="{{index}}" name="foodtype" range="{{picker}}">
+		<picker disabled="{{readonly}}" bindchange="PickerChange" value="{{DietnoteInfo.foodtype ? DietnoteInfo.foodtype : index}}" name="foodtype" range="{{picker}}">
 			<view class="picker">
 				{{index?picker[index]:'禁止换行，超出容器部分会以 ... 方式截断'}}
 			</view>
 		</picker>
 	</view>
-  <view class="cu-form-group align-start">
+   <view class="cu-form-group" wx:if="{{readonly}}" >
+		<view class="title">描述内容</view>
+    <view class="text-left padding">{{DietnoteInfo.notes}}</view>
+	</view>
+
+  <view class="cu-form-group align-start" wx:if="{{!readonly}}">
 		<view class="title">描述</view>
 		<textarea disabled="{{readonly}}" maxlength="200" placeholder="多行文本输入框" name="notes" value="{{notes}}"></textarea>
 	</view>
-  <view class="cu-bar bg-white margin-top">
+  
+  <view class="cu-bar bg-white margin-top" wx:if="{{!readonly}}">
 		<view class="action">
 			拍个照片留恋吧
 		</view>
@@ -44,7 +56,7 @@
 			{{imgList.length}}/4
 		</view>
 	</view>
-  <view class="cu-form-group">
+  <view class="cu-form-group" wx:if="{{!readonly}}">
 		<view class="grid col-4 grid-square flex-sub">
 			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index].filePath}}">
 				<image src='{{imgList[index].filePath}}' mode='aspectFill'></image>
@@ -59,6 +71,6 @@
 	</view>
   <view class="padding flex flex-direction margin">
     <button class="cu-btn bg-white lg" wx:if="{{!readonly}}" form-type="submit" >开始</button>
-    <button class="cu-btn bg-red margin-tb-sm lg" wx:if="{{readonly}}">结束</button>
+    <button class="cu-btn bg-red margin-tb-sm lg" bindtap="overClick" wx:if="{{readonly}}">结束</button>
   </view>
 </form>

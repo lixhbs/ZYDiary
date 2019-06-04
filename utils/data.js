@@ -31,6 +31,14 @@ const endSetting = (arg) => {
   })
 }
 
+const getUserInfoBySession = (arg) => {
+  return new Promise((resolve, reject) => {
+    request('/User/getUserInfoBySession', arg).then(res => {
+      resolve(checkSucces(res));
+    })
+  })
+}
+
 const checkSucces = arg => {
   return arg.data
 }
@@ -38,5 +46,6 @@ const checkSucces = arg => {
 module.exports = {
   searchDietnote: searchDietnote,
   endSetting: endSetting,
-  request: request
+  request: request,
+  getUserInfoBySession
 }

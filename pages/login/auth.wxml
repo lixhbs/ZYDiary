@@ -1,0 +1,16 @@
+<view >
+  <view class='UCenter-bg'>
+    <image src='' class='logo shadow' mode='widthFix'></image>
+    <view class='text-xl text-white'>宝宝日记
+      <text class='padding-xs'>v1.0.0</text>
+    </view>
+    <view class="margin-top-sm text-white">
+      <text>权限获取</text>
+    </view>
+  </view>
+  <view class='padding-xl'>
+    <button class='cu-btn shadow lg block text-white' style="background-image: linear-gradient( 135deg, #FEB692 10%, #EA5455 100%);" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信登录</button>
+
+  </view>
+</view>
+

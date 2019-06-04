@@ -1,3 +1,5 @@
+const apiData = require('./data.js');
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -42,9 +44,106 @@ const uploadFile = filePath => {
   })
 }
 
+function checkSession() {
+  return new Promise((resolve, reject) => {
+    wx.checkSession({
+      success(arg) {
+        resolve(true)
+      },
+      fail(e) {
+        resolve(false)
+      }
+    })
+  })
+}
+
+function getLoginCode() {
+  return new Promise((resolve) => {
+    wx.login({
+      success(res) {
+        resolve(res)
+      }
+    })
+  })
+}
+function getUserInfo() {
+  return new Promise((resolve, reject) => {
+    checkSession().then(flag => {
+      const userData = wx.getStorageSync("userData")
+      if (flag && userData){
+        apiData.getUserInfoBySession().then(userSession => {
+          if (!userSession.data) {
+            InitUserInfo(userData).then(data => {
+              resolve(data)
+            });
+          } else {
+            resolve(userData)
+          }
+        });
+      } else {
+        wx.navigateTo({
+          url: '/pages/login/auth'
+        })
+      }
+    })
+  });
+}
+
+function InitUserInfo(arg) {
+  return new Promise((resolve, reject) => {
+    getLoginCode().then(res => {
+      if (res.code && arg) {
+        arg.appid = 'wx52768c4ab925bedc'
+        arg.loginCode = res.code
+        apiData.request('/User/getUserInfoByLoginCode', arg).then(data => {
+          if (data && data.data.code === '0') {
+            resolve(data.data.data)
+            // wx.setStorageSync('Cookie_user', data.cookies[0])
+            wx.setStorageSync("userData", data.data.data)
+          }
+        }, reason => {
+          reject(reason)
+        }).catch(function (reason) {
+          console.log('[InitUserInfo] catch:', reason)
+          wx.showModal({
+            title: '[InitUserInfo] catch',
+            content: JSON.stringify(reason)
+          })
+        })
+      }
+    }).catch(function (reason) {
+      console.log('[InitUserInfo] catch:', reason)
+    })
+  }).catch(function (reason) {
+    console.log('[InitUserInfo] catch:', reason)
+  })
+}
+
+const login = (arg) => {
+  wx.showLoading({
+    title: '加载中',
+    mask: true,
+  })
+  
+  if (!wx.getStorageSync("userData")) {
+    wx.navigateTo({
+      url: '/pages/login/auth',
+    })
+    return null;
+  } else {
+    wx.hideLoading()
+  }
+  
+}
+
 module.exports = {
-  formatTime: formatTime,
-  formatDate: formatDate,
-  formatTimes: formatTimes,
-  uploadFile: uploadFile
+  formatTime,
+  formatDate,
+  formatTimes,
+  uploadFile,
+  login,
+  checkSession,
+  getLoginCode,
+  InitUserInfo,
+  getUserInfo
 }

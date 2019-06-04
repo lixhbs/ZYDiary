@@ -1,4 +1,6 @@
-// pages/login/login.js
+// pages/login/auth.js
+const utils = require('../../utils/util.js');
+const app = getApp()
 Page({
 
   /**
@@ -6,10 +8,6 @@ Page({
    */
   data: {
 
-  },
-
-  config: {
-    'navigationBarTitleText': '授权登录'
   },
 
   /**
@@ -26,6 +24,27 @@ Page({
 
   },
 
+  bindGetUserInfo: function (t) {
+    var errMsg = t.detail.errMsg
+    if (errMsg == 'getUserInfo:ok') {
+      wx.setStorageSync("userInfo", t.detail.userInfo)
+      wx.setStorageSync("userData", t.detail)
+      app.globalData.userInfo = t.detail.userInfo
+      utils.InitUserInfo(t.detail.userInfo).then(res => {
+        wx.setStorageSync("userData", res);
+        wx.navigateBack({
+          delta: 1,
+        })
+      })
+      
+    } else {
+      wx.showToast({
+        title: '请授权！',
+        icon: 'none',
+        mask: true,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */

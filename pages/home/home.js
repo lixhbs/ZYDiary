@@ -1,5 +1,7 @@
 // pages/home/home.js
 const database = require('../../utils/data.js');
+const utils = require('../../utils/util.js');
+const app = getApp()
 Page({
 
   /**
@@ -84,8 +86,6 @@ Page({
         }
       }
     })
-
-    
   },
 
   /**
@@ -106,8 +106,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-    this.searchDietnote()
+    // 首先查询登录情况和是否注册
+    utils.getUserInfo().then(data => {
+      if (data) {
+        this.searchDietnote()
+      }
+    })
   },
   searchDietnote: function (){
     database.searchDietnote().then(res => {
