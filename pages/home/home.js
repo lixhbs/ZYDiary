@@ -7,7 +7,7 @@ Page({
    */
   data: {
     Dietnote: {},
-    isfeed: true,
+    isfeed: false,
     MenuList: [{
       title: '喂食',
       name: 'red',
@@ -62,11 +62,30 @@ Page({
     }
   },
   overClick: function() {
-    database.endSetting(this.data.Dietnote).then(res => {
-      if (res.data) {
-        this.searchDietnote()
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: '是否结束本次记录',
+      success(res) {
+        if (res.confirm) {
+          database.endSetting(that.data.Dietnote).then(res => {
+            if (res.data) {
+              wx.showToast({
+                title: '记录成功',
+                icon: 'none',
+                complete: () => {
+                  setTimeout(() => {
+                    that.searchDietnote()
+                  }, 2000)
+                }
+              })
+            }
+          });
+        }
       }
-    });
+    })
+
+    
   },
 
   /**

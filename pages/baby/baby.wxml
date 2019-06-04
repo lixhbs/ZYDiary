@@ -1,0 +1,56 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <image src="http://qiniuimages.aprcode.com/WechatIMG7053.jpeg" class="png" mode="aspectFill"></image>
+    <view class="text-xxl">李泽宇
+    </view>
+    <view class="margin-top-sm">
+      <text>2019年05月26日20:21:00</text>
+    </view>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-orange">3000g</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-attentionfill"></text>体重</view>
+    </view>
+    <view class="flex flex-sub flex-direction">
+      <view class="text-xxl text-blue">50cm</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-favorfill"></text>身高</view>
+    </view>
+  </view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/feed/list/list" hover-class="none">
+        <text class="cuIcon-formfill text-red"></text>
+        <text class="text-grey">饮食记录</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/log/log" hover-class="none">
+        <text class="cuIcon-formfill text-green"></text>
+        <text class="text-grey">排便记录</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" bindtap="showQrcode">
+        <text class="cuIcon-formfill text-red"></text>
+        <text class="text-grey">体重变化</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-formfill text-cyan"></text>
+        <text class="text-grey">身高变化</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/test/list" hover-class="none">
+        <text class="cuIcon-formfill text-orange"></text>
+        <text class="text-grey">预防记录</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>

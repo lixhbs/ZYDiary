@@ -1,14 +1,17 @@
 <!--pages/home/home.wxml-->
-<view class="cu-bar bg-white margin-top">
+
+<!--所有的通知都没有的时候隐藏代办事项标题-->
+<view wx:if="{{isfeed}}" class="cu-bar bg-white margin-top">
   <view class="action">
     <text class="cuIcon-titles text-green"></text>
     <text>待办事项</text>
   </view>
 </view>
-<view class="grid col-1 padding-sm">
+
+<view wx:if="{{isfeed}}" bindtap='overClick' class="grid col-1 padding-sm">
   <view class="padding-sm">
-    <view wx:if="{{isfeed}}"class="bg-gradual-red padding radius text-center shadow-blur">
-      <view class="text-lg" bindtap='overClick'>喂食中（点击结束）</view>
+    <view class="bg-gradual-red padding radius text-center shadow-blur">
+      <view class="text-lg" >喂食中（点击结束）</view>
       <view class="margin-top-sm text-Abc">{{Dietnote.begintime}}</view>
     </view>
   </view>

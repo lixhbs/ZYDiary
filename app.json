@@ -3,12 +3,15 @@
     "pages/home/home",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/feed/feed"
+    "pages/feed/feed",
+    "pages/baby/baby",
+    "pages/feed/list/list",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "泽宇日记",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
@@ -23,7 +26,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/baby/baby",
         "text": "宝宝"
       }
     ]
