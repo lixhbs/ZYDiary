@@ -1,2 +1,25 @@
 <!--pages/feed/list/list.wxml-->
-<text>pages/feed/list/list.wxml</text>
+<block wx:for="{{list}}" wx:key>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-titles text-orange "></text> {{item.data}} | 共{{item.list.length}}次
+    </view>
+  </view>
+  <view class="cu-list menu-avatar">
+    <view class="cu-item grayscale" wx:for="{{item.list}}" wx:for-item="dataList" wx:key>
+      <!-- <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);"></view> -->
+      <view class="content" style='left: 0rpx; margin-left: 30rpx'>
+        <view>
+          <text class="text-cut">开始时间：{{dataList.begintime}}</text>
+          <!-- <view class="cu-tag round bg-orange sm">断开连接...</view> -->
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut"> 结束时间：{{dataList.endtime}}</text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey text-l">共{{dataList.duration}}分钟</view>
+      </view>
+    </view>
+  </view>
+</block>

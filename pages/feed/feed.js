@@ -149,8 +149,12 @@ Page({
   },
   formSubmit: function (e) {
     let dietnotes = e.detail.value
-    dietnotes.imglist = JSON.stringify(this.data.imgList)
-    dietnotes.begintime = `${dietnotes.date} ${dietnotes.time}:00`
+    if (this.data.imgList && this.data.imgList.length > 0) {
+      dietnotes.imglist = JSON.stringify(this.data.imgList)
+    }
+    dietnotes.begintime = `${dietnotes.time}:00`;
+    dietnotes.begindata = dietnotes.date;
+
     console.log('请求：', dietnotes)
     wx.request({
       url: `${app.globalData.baseUrl}/ZYDiary/addDietnote`,

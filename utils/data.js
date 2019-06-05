@@ -39,6 +39,16 @@ const getUserInfoBySession = (arg) => {
   })
 }
 
+// listDietnote
+
+const listDietnote = (arg) => {
+  return new Promise((resolve, reject) => {
+    request('/ZYDiary/listDietnote', arg).then(res => {
+      resolve(checkSucces(res));
+    })
+  })
+}
+
 const checkSucces = arg => {
   return arg.data
 }
@@ -47,5 +57,6 @@ module.exports = {
   searchDietnote: searchDietnote,
   endSetting: endSetting,
   request: request,
-  getUserInfoBySession
+  getUserInfoBySession,
+  listDietnote
 }
