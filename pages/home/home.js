@@ -15,37 +15,49 @@ Page({
       name: 'red',
       text: 'feed',
       color: '#e54d42',
-      url: './../feed/feed'
+      url: './../feed/feed',
+      badge: 0,
+      icon: "icon-weinai"
     },
     {
       title: '排泄',
       name: 'orange',
       text: 'egest',
-      color: '#f37b1d'
+      color: '#f37b1d',
+      badge: 0,
+      icon: "icon-dabian"
     },
     {
       title: '体重',
       name: 'yellow',
       text: 'weight',
-      color: '#fbbd08'
+      color: '#fbbd08',
+      badge: 0,
+      icon: "icon-tizhong"
     },
     {
       title: '三围',
       name: 'olive',
       text: 'bwh',
-      color: '#8dc63f'
+      color: '#8dc63f',
+      badge: 0,
+      icon: "icon-tubiao-"
     },
     {
       title: '预防',
       name: 'green',
       text: 'prevent',
-      color: '#39b54a'
+      color: '#39b54a',
+      badge: 0,
+      icon: "icon-yufang"
     },
     {
       title: '提醒',
       name: 'cyan',
       text: 'remind',
-      color: '#1cbbb4'
+      color: '#1cbbb4',
+      badge: 0,
+      icon: "icon-tixing"
     }
     ]
   },

@@ -7,7 +7,8 @@
     "pages/baby/baby",
     "pages/feed/list/list",
     "pages/login/login",
-    "pages/login/auth"
+    "pages/login/auth",
+    "pages/feed/menu/menu"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,5 +1,14 @@
 <!--pages/home/home.wxml-->
-
+<view class="cu-list grid col-3 {{gridBorder?'':'no-border'}}" >
+  <view class="cu-item" wx:for="{{MenuList}}" wx:key bindtap='menuNavigateTo' data-url="{{ item.url }}">
+    <view class="cuIcon {{item.icon}} text-{{item.name}}">
+      <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+        <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+      </view>
+    </view>
+    <text>{{item.title}}</text>
+  </view>
+</view>
 <!--所有的通知都没有的时候隐藏代办事项标题-->
 <view wx:if="{{isfeed}}" class="cu-bar bg-white margin-top">
   <view class="action">
@@ -13,20 +22,6 @@
     <view class="bg-gradual-red padding radius text-center shadow-blur">
       <view class="text-lg" >喂食中（点击结束）</view>
       <view class="margin-top-sm text-Abc">{{Dietnote.begintime}}</view>
-    </view>
-  </view>
-</view>
-<view class="cu-bar bg-white margin-top">
-  <view class="action">
-    <text class="cuIcon-titles text-green"></text>
-    <text>功能按钮</text>
-  </view>
-</view>
-<view class="grid col-2 padding-sm">
-  <view class="padding-sm" wx:for="{{ MenuList }}" wx:key>
-    <view data-url="{{ item.url }}" class="bg-{{item.name}} padding radius text-center shadow-blur" bindtap='menuNavigateTo'>
-      <view class="text-lg">{{item.title}}</view>
-      <view class="margin-top-sm text-Abc">{{item.text}}</view>
     </view>
   </view>
 </view>
