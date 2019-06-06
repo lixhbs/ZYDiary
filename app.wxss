@@ -1,6 +1,7 @@
 /**app.wxss**/
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
+@import "colorui/iconfont.wxss";
 
 .scrollPage {
   height: 100vh;

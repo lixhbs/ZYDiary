@@ -1,24 +1,11 @@
-// pages/feed/menu/menu.js
+// pages/feed/milks.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    MenuList: [{
-      title: '母乳',
-      color: 'red',
-      name: '',
-      url: './../feed/feed',
-      icon: "icon-muruqinwei"
-    }, 
-    {
-      title: '奶粉',
-      color: 'orange',
-      name: '',
-      url: './../feed/milks',
-      icon: "icon-weinai"
-    }]
+
   },
 
   /**

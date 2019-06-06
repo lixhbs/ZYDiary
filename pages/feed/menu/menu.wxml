@@ -1,2 +1,8 @@
 <!--pages/feed/menu/menu.wxml-->
-<text>pages/feed/menu/menu.wxml</text>
+<view style="margin-top:50%;" class="grid col-1 padding-sm">
+  <view class="padding-sm" wx:for="{{MenuList}}" wx:key>
+    <view  class="bg-{{item.color}} padding radius text-center shadow-blur">
+      <text class="cuIcon {{item.icon}} lg text-white">   {{item.title}}</text>
+    </view>
+  </view>
+</view>

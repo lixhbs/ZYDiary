@@ -15,7 +15,7 @@ Page({
       name: 'red',
       text: 'feed',
       color: '#e54d42',
-      url: './../feed/feed',
+      url: './../feed/menu/menu',
       badge: 0,
       icon: "icon-weinai"
     },
