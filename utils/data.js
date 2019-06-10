@@ -13,6 +13,13 @@ const request = (url, data) => {
   })
 }
 
+const listCodeValuesByName = (name) => {
+  return new Promise((resolve, reject) => {
+    request('/codevalue/listCodeValuesByName', name).then(res => {
+      resolve(checkSucces(res));
+    })
+  })
+}
 const searchDietnote = () => {
   return new Promise((resolve, reject) => {
     request('/ZYDiary/searchDietnote', {
@@ -49,6 +56,24 @@ const listDietnote = (arg) => {
   })
 }
 
+// searchRelationship
+
+const searchRelationship = () => {
+  return new Promise((resolve, reject) => {
+    request('/ZYDiary/searchRelationship', null).then(res => {
+      resolve(checkSucces(res));
+    })
+  })
+}
+
+const addRelationship = (arg) => {
+  return new Promise((resolve, reject) => {
+    request('/ZYDiary/addRelationship', arg).then(res => {
+      resolve(checkSucces(res));
+    })
+  })
+}
+
 const checkSucces = arg => {
   return arg.data
 }
@@ -58,5 +83,8 @@ module.exports = {
   endSetting: endSetting,
   request: request,
   getUserInfoBySession,
-  listDietnote
+  listDietnote,
+  searchRelationship,
+  listCodeValuesByName,
+  addRelationship
 }

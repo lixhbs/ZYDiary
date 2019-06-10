@@ -1,24 +1,37 @@
 <!--pages/feed/list/list.wxml-->
 <block wx:for="{{list}}" wx:key>
   <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
+    <view class="action" >
       <text class="cuIcon-titles text-orange "></text> {{item.data}} | 共{{item.list.length}}次
     </view>
   </view>
   <view class="cu-list menu-avatar">
     <view class="cu-item grayscale" wx:for="{{item.list}}" wx:for-item="dataList" wx:key>
       <!-- <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);"></view> -->
-      <view class="content" style='left: 0rpx; margin-left: 30rpx'>
-        <view>
-          <text class="text-cut">开始时间：{{dataList.begintime}}</text>
-          <!-- <view class="cu-tag round bg-orange sm">断开连接...</view> -->
+      <view wx:if="{{dataList.foodtype === 0}}">
+        <view class="content" style='left: 0rpx; margin-left: 30rpx'>
+          <view>
+            <text class="text-cut"><text class="cuIcon icon-muruqinwei lg text-black"></text>母乳 - 开始时间：{{dataList.begintime}}</text>
+            <!-- <view class="cu-tag round bg-orange sm">断开连接...</view> -->
+          </view>
+          <view class="text-gray text-sm flex">
+            <text class="text-cut"> 结束时间：{{dataList.endtime}}</text>
+          </view>
         </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut"> 结束时间：{{dataList.endtime}}</text>
+        <view class="action" style='width:200rpx;'>
+          <view class="text-grey text-l">共{{dataList.duration}}分钟</view>
         </view>
       </view>
-      <view class="action">
-        <view class="text-grey text-l">共{{dataList.duration}}分钟</view>
+      <view wx:if="{{dataList.foodtype === 1}}">
+        <view class="content" style='left: 0rpx; margin-left: 30rpx'>
+          <view>
+            <text class="text-cut"><text class="cuIcon icon-weinai lg text-black"></text>奶粉 - 记录时间：{{dataList.begintime}}</text>
+            <!-- <view class="cu-tag round bg-orange sm">断开连接...</view> -->
+          </view>
+        </view>
+        <view class="action" style='width:200rpx;'>
+          <view class="text-grey text-l">共 {{dataList.milliliter}} ml</view>
+        </view>
       </view>
     </view>
   </view>

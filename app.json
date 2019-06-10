@@ -9,12 +9,13 @@
     "pages/login/login",
     "pages/login/auth",
     "pages/feed/menu/menu",
-    "pages/feed/milks"
+    "pages/feed/milks",
+    "pages/baby/binding/binding"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "泽宇日记",
+    "navigationBarTitleText": "柚宝育儿日记",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
@@ -26,10 +27,14 @@
     "list": [
       {
         "pagePath": "pages/home/home",
+        "iconPath": "style/homes.png",
+        "selectedIconPath": "style/home.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/baby/baby",
+        "iconPath": "style/babys.png",
+        "selectedIconPath": "style/baby.png",
         "text": "宝宝"
       }
     ]

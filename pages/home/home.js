@@ -1,6 +1,7 @@
 // pages/home/home.js
 const database = require('../../utils/data.js');
 const utils = require('../../utils/util.js');
+const logic = require('../../utils/dataLogic.js');
 const app = getApp()
 Page({
 
@@ -77,6 +78,7 @@ Page({
   },
   overClick: function() {
     let that = this;
+    // 结束记录前应该查询本次记录是否真正结束？
     wx.showModal({
       title: '提示',
       content: '是否结束本次记录',
@@ -121,7 +123,8 @@ Page({
     // 首先查询登录情况和是否注册
     utils.getUserInfo().then(data => {
       if (data) {
-        this.searchDietnote()
+        this.searchDietnote();
+        logic.searchRelationship(data);
       }
     })
   },

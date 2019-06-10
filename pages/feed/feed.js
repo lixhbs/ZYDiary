@@ -8,7 +8,7 @@ Page({
    */
   data: {
     readonly: false,
-    picker: ['母乳', '奶粉', '辅食'],
+    picker: ['母乳', '奶粉'],
     index: '0',
     time: util.formatTimes(new Date()),
     date: util.formatDate(new Date()),

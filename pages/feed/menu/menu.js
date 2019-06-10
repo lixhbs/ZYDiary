@@ -9,16 +9,29 @@ Page({
       title: '母乳',
       color: 'red',
       name: '',
-      url: './../feed/feed',
+      url: './../../feed/feed',
       icon: "icon-muruqinwei"
     }, 
     {
       title: '奶粉',
       color: 'orange',
       name: '',
-      url: './../feed/milks',
+      url: './../../feed/milks',
       icon: "icon-weinai"
     }]
+  },
+  menuNavigateTo: e => {
+    const url = e.currentTarget.dataset.url;
+    if (url) {
+      wx.navigateTo({
+        url: url,
+      })
+    } else {
+      wx.showToast({
+        title: '开发中。。。',
+        icon: 'none'
+      })
+    }
   },
 
   /**

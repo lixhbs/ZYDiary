@@ -1,6 +1,6 @@
 <!--pages/feed/menu/menu.wxml-->
 <view style="margin-top:50%;" class="grid col-1 padding-sm">
-  <view class="padding-sm" wx:for="{{MenuList}}" wx:key>
+  <view class="padding-sm" wx:for="{{MenuList}}" wx:key bindtap='menuNavigateTo' data-url="{{ item.url }}">
     <view  class="bg-{{item.color}} padding radius text-center shadow-blur">
       <text class="cuIcon {{item.icon}} lg text-white">   {{item.title}}</text>
     </view>
