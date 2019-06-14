@@ -10,7 +10,12 @@
     "pages/login/auth",
     "pages/feed/menu/menu",
     "pages/feed/milks",
-    "pages/baby/binding/binding"
+    "pages/baby/binding/binding",
+    "pages/baby/babyinfo",
+    "pages/baby/babyweight",
+    "pages/baby/babyweightlist",
+    "pages/olive/olive",
+    "pages/olive/oliveList"
   ],
   "window": {
     "backgroundTextStyle": "light",

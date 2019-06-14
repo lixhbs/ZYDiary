@@ -4,13 +4,13 @@
   <input placeholder="请输入宝宝编号" bindinput="bindKeyInput" valie="{{number}}"></input>
 </view>
 <view class="cu-form-group">
-		<view class="title">关系</view>
-		<picker bindchange="relationshipChange" range-key="value" value="{{index}}" name="relationship" range="{{relationship}}">
-			<view class="picker">
-				{{index?relationship[index].value:'禁止换行，超出容器部分会以 ... 方式截断'}}
-			</view>
-		</picker>
-	</view>
+  <view class="title">关系</view>
+  <picker bindchange="relationshipChange" range-key="value" value="{{index}}" name="relationship" range="{{relationship}}">
+    <view class="picker">
+      {{index?relationship[index].value:'禁止换行，超出容器部分会以 ... 方式截断'}}
+    </view>
+  </picker>
+</view>
 
 <view class="padding flex flex-direction ">
   <button class="cu-btn bg-gradual-green lg" bindtap='bindbaby'>绑定</button>

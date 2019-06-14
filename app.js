@@ -40,6 +40,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'http://192.168.1.109:8080'
+    baseUrl: 'https://aprcode.com/ofitprod', // http://192.168.1.109:8080 192.168.5.207 192.168.1.109 https://aprcode.com/ofittest
   }
 })

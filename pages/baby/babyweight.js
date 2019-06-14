@@ -1,66 +1,54 @@
-// pages/baby/binding/binding.js
-
-const util = require('../../../utils/util.js');
-const database = require('../../../utils/data.js');
+// pages/baby/babyweight.js
+const util = require('../../utils/util.js');
+const database = require('../../utils/data.js');
 const app = getApp();
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    relationship: [],
-    index: '0',
-    number: ''
+    notesdata: util.formatDate(new Date()),
+    weight: ''
   },
-  bindKeyInput: function (e) {
+  DateChange(e) {
     this.setData({
-      number: e.detail.value
+      notesdata: e.detail.value
     })
   },
-  relationshipChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    });
-  },
-  bindbaby(arg) {
-    let data = {};
-    data.codeid = this.data.relationship[this.data.index].codeid;
-    data.number = this.data.number
-    database.addRelationship(data).then(res => {
-      console.log(res);
+  formSubmit: function (e) {
+    let baby = e.detail.value
+    if (!baby.weight) {
+      wx.showToast({
+        title: '请填写体重！',
+        icon: 'none'
+      })
+      return false;
+    }
+    
+    console.log('请求：', baby)
+    database.addBabyweight(baby).then(res => {
       if (res.code === '0') {
         wx.showToast({
-          title: '绑定成功！',
+          title: '添加成功！',
           icon: 'success',
           duration: 1000,
           complete: () => {
             setTimeout(() => {
               wx.switchTab({
-                url: './../../home/home',
+                url: './../home/home',
               })
             }, 1000)
           }
         })
-        
       } else {
         wx.showToast({
-          title: res.message,
+          title: '添加失败',
           icon: 'none'
         })
       }
-    })
-    console.log(data);
+    });
   },
-
-  createinfo(arg) {
-    wx.navigateTo({
-      url: './../babyinfo',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -79,13 +67,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    database.listCodeValuesByName("zyrj_relationship").then(res => {
-      this.setData({
-        relationship: res.data
-      })
-      console.log(res);
-    });
-    
+
   },
 
   /**

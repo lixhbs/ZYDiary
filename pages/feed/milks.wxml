@@ -7,7 +7,7 @@
   </view>
 </view> -->
 
-<form bindsubmit="formSubmit" >
+<form bindsubmit="formSubmit" report-submit="true" >
   <view class="cu-form-group margin-top" >
 		<view class="title">记录日期</view>
 		<picker mode="date" value="{{date}}" name="date" start="2018-01-01" end="2030-01-01" bindchange="DateChange">

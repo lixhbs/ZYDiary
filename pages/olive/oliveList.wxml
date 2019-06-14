@@ -1,0 +1,32 @@
+<!--pages/olive/oliveList.wxml-->
+<!--pages/baby/babyolivelist.wxml-->
+<view class="padding flex text-center text-grey bg-white shadow-warp">
+  <view class="flex flex-sub flex-direction solid-right">
+    <view class="text-xxl text-orange">{{olivelist.length > 0 ? olivelist[0].olive : "--"}} cm</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-attentionfill"></text>目前身高</view>
+  </view>
+  <view class="flex flex-sub flex-direction solid-right">
+    <view class="text-xxl text-blue">{{olivelist.length > 1 ? olivelist[1].olive : "--"}}  cm</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-favorfill"></text>上次身高</view>
+  </view>
+  <view class="flex flex-sub flex-direction">
+    <view class="text-xxl text-red">{{increase}} cm</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-favorfill"></text> 增长身高</view>
+  </view>
+</view>
+
+<view class="cu-list menu-avatar card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item grayscale" wx:for="{{olivelist}}" wx:for-item="wl" wx:key>
+        <view class="content" style='left: 0rpx; margin-left: 30rpx'>
+          <view>
+            <text class="text-cut"><text class="cuIcon icon-tubiao- lg text-olive"></text>  身高 {{wl.olive}} cm</text>
+          </view>
+        </view>
+        <view class="action" style='width:200rpx;'>
+          <view class="text-black text-l">{{wl.notesdata}}</view>
+        </view>
+      </view>
+  </view>

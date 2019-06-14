@@ -1,0 +1,31 @@
+<!--pages/baby/babyweightlist.wxml-->
+<view class="padding flex text-center text-grey bg-white shadow-warp">
+  <view class="flex flex-sub flex-direction solid-right">
+    <view class="text-xxl text-orange">{{weightlist.length > 0 ? weightlist[0].weight : "--"}} Kg</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-attentionfill"></text>目前体重</view>
+  </view>
+  <view class="flex flex-sub flex-direction solid-right">
+    <view class="text-xxl text-blue">{{weightlist.length > 1 ? weightlist[1].weight : "--"}}  Kg</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-favorfill"></text>上次体重</view>
+  </view>
+  <view class="flex flex-sub flex-direction">
+    <view class="text-xxl text-red">{{increase}} Kg</view>
+    <view class="margin-top-sm">
+      <text class="cuIcon-favorfill"></text> 增长体重</view>
+  </view>
+</view>
+
+<view class="cu-list menu-avatar card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item grayscale" wx:for="{{weightlist}}" wx:for-item="wl" wx:key>
+        <view class="content" style='left: 0rpx; margin-left: 30rpx'>
+          <view>
+            <text class="text-cut"><text class="cuIcon icon-tizhong lg text-yellow"></text>  体重 {{wl.weight}} Kg</text>
+          </view>
+        </view>
+        <view class="action" style='width:200rpx;'>
+          <view class="text-black text-l">{{wl.notesdata}}</view>
+        </view>
+      </view>
+  </view>

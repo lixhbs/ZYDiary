@@ -1,5 +1,15 @@
 <!--pages/home/home.wxml-->
-<view class="cu-list grid col-3 {{gridBorder?'':'no-border'}}" >
+
+<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}} bg-white" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+    <view class="swiper-item">
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </view>
+  </swiper-item>
+</swiper>
+
+<view class="cu-list grid col-4 {{gridBorder?'':'no-border'}}" >
   <view class="cu-item" wx:for="{{MenuList}}" wx:key bindtap='menuNavigateTo' data-url="{{ item.url }}">
     <view class="cuIcon {{item.icon}} text-{{item.name}}">
       <view class="cu-tag badge" wx:if="{{item.badge!=0}}">

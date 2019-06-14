@@ -1,3 +1,4 @@
+// pages/baby/babyinfo.js
 const util = require('../../utils/util.js');
 const database = require('../../utils/data.js');
 const app = getApp();
@@ -7,29 +8,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picker: ['母乳', '奶粉'],
-    index: '1',
-    time: util.formatTimes(new Date()),
-    date: util.formatDate(new Date()),
+    indexSex: '0',
+    sex: ['男', '女'],
+    index: 0,
     imgList: [],
-    previewImage: []
-  },
-  PickerChange(e) {
-    console.log(e);
-    this.setData({
-      index: e.detail.value
-    })
+    previewImage: [],
+    birthtime: '20:21',
+    birthday: '2019-05-26',
+    relationship: [{ 'codeid': '0', 'value': '请选择'}],
+    reindex: '0',
+    name: '',
+    milkname: '',
   },
   TimeChange(e) {
     this.setData({
-      time: e.detail.value
+      birthtime: e.detail.value
     })
+  },
+  relationshipChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      reindex: e.detail.value
+    });
   },
   DateChange(e) {
     this.setData({
-      date: e.detail.value
+      birthday: e.detail.value
     })
-  }, 
+  },
   ChooseImage() {
     wx.chooseImage({
       count: 4, //默认9
@@ -87,7 +93,7 @@ Page({
   DelImg(e) {
     wx.showModal({
       title: '宝宝的相片',
-      content: '确定要删除这段回忆吗？',
+      content: '确定要删除这张照片吗？',
       cancelText: '再看看',
       confirmText: '删了',
       success: res => {
@@ -117,67 +123,78 @@ Page({
       }
     })
   },
+
   formSubmit: function (e) {
-    const formId = e.detail.formId
-    let dietnotes = e.detail.value
-    if (!dietnotes.milliliter) {
+    let baby = e.detail.value
+    if (this.data.imgList && this.data.imgList.length > 0) {
+      baby.photo = JSON.stringify(this.data.imgList)
+    }
+    if (!baby.name) {
       wx.showToast({
-        title: '请记录奶粉份量',
-        icon: 'none',
-        duration: 1500,
-        complete: () => {
-          setTimeout(() => {
-            return false;
-          }, 1500)
-        }
+        title: '请填写姓名！',
+        icon: 'none'
       })
       return false;
     }
-    if (this.data.imgList && this.data.imgList.length > 0) {
-      dietnotes.imglist = JSON.stringify(this.data.imgList)
-    }
-    dietnotes.begintime = `${dietnotes.time}:00`;
-    dietnotes.begindata = dietnotes.date;
 
-    console.log('请求：', dietnotes)
-    wx.request({
-      url: `${app.globalData.baseUrl}/ZYDiary/addDietnote`,
-      data: dietnotes,
-      method: "POST",
-      success(res) {
-        res = res.data
-        if (res.code === "0") {
-          const templateData = {
-            dietnotes: dietnotes,
-            fromid: formId
+    if (!baby.milkname) {
+      wx.showToast({
+        title: '请填写小名！',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    if (this.data.reindex === '0'){
+      wx.showToast({
+        title: '请选择关系！',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    if (!baby.photo) {
+      wx.showToast({
+        title: '请至少添加一张照片！',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    const data = {
+      baby: baby,
+      relationship: this.data.reindex
+    }
+    console.log('请求：', data)
+    database.addBaby(data).then(res => {
+      if (res.code === '0'){
+        wx.showToast({
+          title: '添加成功！',
+          icon: 'success',
+          duration: 1000,
+          complete: () => {
+            setTimeout(() => {
+              wx.switchTab({
+                url: './../home/home',
+              })
+            }, 1000)
           }
-          // database.sendDietnotes(templateData) // 由于不能同时发送给多人就暂时去掉此功能
-          wx.showToast({
-            title: '记录成功！',
-            icon: 'success',
-            duration: 1500,
-            complete: () => {
-              setTimeout(() => {
-                wx.switchTab({
-                  url: './../home/home',
-                })
-              }, 2000)
-            }
-          })
-        } else {
-          wx.showToast({
-            title: '记录失败',
-            icon: 'none'
-          })
-        }
-      },
-    })
+        })
+      } else {
+        wx.showToast({
+          title: '创建失败',
+          icon: 'none'
+        })
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.setNavigationBarTitle({
+      title: '宝宝档案',
+    })
   },
 
   /**
@@ -191,7 +208,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    database.listCodeValuesByName("zyrj_relationship").then(res => {
+      this.setData({
+        relationship: this.data.relationship.concat(res.data)
+      })
+      console.log(res);
+    });
   },
 
   /**

@@ -1,34 +1,22 @@
-// pages/feed/list/list.js
-
-const util = require('../../../utils/util.js');
-const database = require('../../../utils/data.js');
+// pages/baby/babyweightlist.js
+const util = require('../../utils/util.js');
+const database = require('../../utils/data.js');
 const app = getApp();
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: []
+    weightlist: []
   },
 
-  listDietnote() {
-    database.listDietnote({}).then(res => {
-      console.log(res);
-      if(res.code === "0") {
-        this.setData({
-          list: res.data
-        })
-      }
-    });
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '饮食管理',
+      title: '体重管理',
     })
   },
 
@@ -43,7 +31,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.listDietnote()
+    database.listBabyweight({}).then(res => {
+      const weightlist = res.data;
+      let increase = "--";
+      if (weightlist.length > 1){
+        increase = parseFloat(weightlist[0].weight - weightlist[1].weight).toFixed(1)
+      }
+      this.setData({
+        weightlist: res.data,
+        increase: increase
+      });
+    });
   },
 
   /**

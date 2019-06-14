@@ -9,6 +9,36 @@ Page({
    * 页面的初始数据
    */
   data: {
+    cardCur: 0,
+    swiperList: [{
+      id: 0,
+      type: 'image',
+      url: 'http://qiniuimages.aprcode.com/20190613102915.png'
+    }, {
+      id: 1,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/baby-nursery.jpg',
+    }, {
+      id: 2,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/baby-nursery.jpg'
+    }, {
+      id: 3,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/baby-nursery.jpg'
+    }, {
+      id: 4,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/20190613102915.png'
+    }, {
+      id: 5,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/baby-nursery.jpg'
+    }, {
+      id: 6,
+      type: 'image',
+        url: 'http://qiniuimages.aprcode.com/baby-nursery.jpg'
+    }],
     Dietnote: {},
     isfeed: false,
     MenuList: [{
@@ -21,26 +51,20 @@ Page({
       icon: "icon-weinai"
     },
     {
-      title: '排泄',
-      name: 'orange',
-      text: 'egest',
-      color: '#f37b1d',
-      badge: 0,
-      icon: "icon-dabian"
-    },
-    {
       title: '体重',
       name: 'yellow',
       text: 'weight',
       color: '#fbbd08',
+      url: './../baby/babyweight',
       badge: 0,
       icon: "icon-tizhong"
     },
     {
-      title: '三围',
+      title: '身高',
       name: 'olive',
       text: 'bwh',
       color: '#8dc63f',
+      url: './../olive/olive',
       badge: 0,
       icon: "icon-tubiao-"
     },
@@ -51,14 +75,6 @@ Page({
       color: '#39b54a',
       badge: 0,
       icon: "icon-yufang"
-    },
-    {
-      title: '提醒',
-      name: 'cyan',
-      text: 'remind',
-      color: '#1cbbb4',
-      badge: 0,
-      icon: "icon-tixing"
     }
     ]
   },
@@ -148,14 +164,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

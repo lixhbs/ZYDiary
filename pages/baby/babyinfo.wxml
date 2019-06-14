@@ -1,0 +1,67 @@
+<!--pages/baby/babyinfo.wxml-->
+<form bindsubmit="formSubmit">
+	<view class="cu-form-group margin-top">
+		<view class="title">宝宝姓名</view>
+		<input placeholder="宝宝姓名" name="name" class="text-right"></input>
+	</view>
+  <view class="cu-form-group ">
+		<view class="title">宝宝小名</view>
+		<input placeholder="请输入宝宝小名" name="milkname" class="text-right"></input>
+	</view>
+  <view class="cu-form-group">
+    <view class="title">宝宝性别</view>
+    <picker bindchange="relationshipChange" value="{{indexSex}}" name="sex" range="{{sex}}">
+      <view class="picker">
+        {{indexSex?sex[indexSex]:'请选择'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group ">
+		<view class="title">出生日期</view>
+		<picker mode="date" value="{{birthday}}" name="birthday" start="2010-01-01" end="2030-01-01" bindchange="DateChange">
+			<view class="picker">
+				{{birthday}}
+			</view>
+		</picker>
+	</view>
+  <view class="cu-form-group ">
+		<view class="title">出生时间</view>
+		<picker mode="time" value="{{birthtime}}" name="birthtime" start="00:00" end="00:00" bindchange="TimeChange">
+			<view class="picker">
+				{{birthtime}}
+			</view>
+		</picker>
+	</view>
+  <view class="cu-form-group margin-top">
+  <view class="title">关系</view>
+  <picker bindchange="relationshipChange" range-key="value" value="{{reindex}}" name="relationship" range="{{relationship}}">
+    <view class="picker">
+      {{reindex?relationship[reindex].value:''}}
+    </view>
+  </picker>
+</view>
+  <view class="cu-bar bg-white margin-top" >
+		<view class="action">
+			头像
+		</view>
+		<view class="action">
+			{{imgList.length}}/4
+		</view>
+	</view>
+  <view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index].filePath}}">
+				<image src='{{imgList[index].filePath}}' mode='aspectFill'></image>
+				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+  <view class="padding flex flex-direction margin">
+    <button class="cu-btn bg-gradual-orange lg button-hover" form-type="submit" >添加</button>
+  </view>
+</form>

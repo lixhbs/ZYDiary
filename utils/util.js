@@ -100,6 +100,10 @@ function InitUserInfo(arg) {
             resolve(data.data.data)
             // wx.setStorageSync('Cookie_user', data.cookies[0])
             wx.setStorageSync("userData", data.data.data)
+          } else{
+            wx.navigateTo({
+              url: '/pages/login/auth'
+            })
           }
         }, reason => {
           reject(reason)
